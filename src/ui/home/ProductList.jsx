@@ -9,7 +9,8 @@ import MaxMinPrice from './MaxMinPrice';
 import SectionHeading from '../../Shared/SectionHeadline';
 import FeatureProducts from './FeatureProducts';
 import NewsLetter from './NewsLetter';
-import { CartContext } from '../../Context/CartContextProvider';
+import {  useCart } from '../../Context/CartContextProvider';
+import toast from 'react-hot-toast';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -17,9 +18,11 @@ const ProductList = () => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const { addToCart, removeFromCart, cart } = useContext(CartContext);
-
+  
+const [cart, setCart] = useCart();
+console.log(cart)
   useEffect(() => {
+    
     fetch('/product.json') // Assuming product.json is in the public folder
       .then(response => response.json())
       .then(data => setProducts(data.products)); // Accessing the 'products' array from the JSON data
@@ -54,15 +57,7 @@ const ProductList = () => {
     return meetsCategoryCriteria && meetsPriceCriteria && meetsSearchCriteria;
   });
 
-// Add to cart funtionality
-const handleAddToCart = (product) => {
-    const isProductInCart = cart.some(item => item.id === product.id);
-    if (isProductInCart) {
-      removeFromCart(product.id);
-    } else {
-      addToCart(product);
-    }
-  };
+
   
 // slider settings
   var settings = {
@@ -161,9 +156,35 @@ const handleAddToCart = (product) => {
 
             <div className='flex justify-between items-center px-4'>
             <h2 className="font-semibold mb-2">৳ {product.price}</h2>
-            <button onClick={() => handleAddToCart(product)}>
-                  {cart.some(item => item.id === product.id) ? 'Remove from Cart' : 'Add to Cart'}
-                </button>
+       <button 
+                    onClick={() => {
+                        const existingProductIndex = cart.findIndex((item) => item.id === product.id);
+                        const updatedCart = [...cart];
+
+                        if (existingProductIndex !== -1) {
+                        // If the product is already in the cart, update the quantity and price
+                        updatedCart[existingProductIndex].quantity += 1; // Increase the quantity
+                        updatedCart[existingProductIndex].price = updatedCart[existingProductIndex].quantity * product.price; // Update the price based on the quantity and original price
+                        } else {
+                        // If the product is not in the cart, add it to the cart
+                        updatedCart.push({ ...product, quantity: 1 });
+                        }
+
+                        // Update cart state
+                        setCart(updatedCart);
+                        
+                        // Update localStorage
+                        localStorage.setItem("cart", JSON.stringify(updatedCart));
+                        
+                        // Show a success message
+                        toast.success("Item Added to cart");
+                    }}
+                    className="hover:bg-black cursor-pointer uppercase bg-transparent border-[2px] border-black atc text-black hover:text-white lg:text-lg md:text-md hover:border-black text-sm  w-full  md:h-12 h-10 mb-2"
+                    >
+                    add to bag
+                    </button>
+
+
             </div> 
             </section>
         ))}

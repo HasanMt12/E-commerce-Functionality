@@ -43,14 +43,16 @@ import Head from "./Head";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/actions/userLogout";
-import { CartContext } from "../Context/CartContextProvider";
+// import {  useCart } from "../Context/CartContextProvider";
+import SideCart from "../Pages/Cart/SideCart";
+import CartSection from "../Pages/Cart/CartSection";
 
 
 const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false);
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
-  const {  cart } = useContext(CartContext);
+  // const [cart, setCart] = (useCart);
   // console.log(userState)
   const [isOpen, setIsOpen] = useState(false);
 
@@ -205,7 +207,7 @@ const Navbar = () => {
                     <button onClick={() => setIsOpen(false)} className="relative p-3">
                       <FaCartShopping className="text-xl text-gray-600 " />
                       <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
-                        {cart.length}
+                       ok
                       </div>
                     </button>
                   ) : (
@@ -213,7 +215,7 @@ const Navbar = () => {
                     <button onClick={() => setIsOpen(true)} className="relative p-3">
                       <FaCartShopping className="text-xl text-gray-600 " />
                       <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
-                      {cart.length}
+                      ok
                       </div>
                     </button>
                   )}
@@ -227,7 +229,13 @@ const Navbar = () => {
         </div>
 
       </div>
-     
+      {isOpen && <>
+        <SideCart isOpen={isOpen} setIsOpen={setIsOpen}>
+          <CartSection setIsOpen={setIsOpen}></CartSection>
+
+        </SideCart>
+
+      </>}
     </>
   )
 }
