@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import  { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,6 +9,7 @@ import MaxMinPrice from './MaxMinPrice';
 import SectionHeading from '../../Shared/SectionHeadline';
 import FeatureProducts from './FeatureProducts';
 import NewsLetter from './NewsLetter';
+import { CartContext } from '../../Context/CartContextProvider';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -16,6 +17,7 @@ const ProductList = () => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const { addToCart, removeFromCart, cart } = useContext(CartContext);
 
   useEffect(() => {
     fetch('/product.json') // Assuming product.json is in the public folder
@@ -52,8 +54,18 @@ const ProductList = () => {
     return meetsCategoryCriteria && meetsPriceCriteria && meetsSearchCriteria;
   });
 
+// Add to cart funtionality
+const handleAddToCart = (product) => {
+    const isProductInCart = cart.some(item => item.id === product.id);
+    if (isProductInCart) {
+      removeFromCart(product.id);
+    } else {
+      addToCart(product);
+    }
+  };
+  
+// slider settings
   var settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     autoplay: true,
@@ -90,6 +102,7 @@ const ProductList = () => {
     ]
   };
 
+// categories dropdownMenu
   const menu = (
     <Menu>
       <Menu.Item key="All product" onClick={() => handleCategoryChange('All product')}>
@@ -131,7 +144,7 @@ const ProductList = () => {
     
       <SectionHeading headingText={selectedCategory}></SectionHeading>
     
-      {filteredProducts.length> 0 ? 
+      {filteredProducts.length > 0 ? 
       (
         <Slider {...settings}>
         {filteredProducts && filteredProducts?.map(product => (
@@ -148,7 +161,9 @@ const ProductList = () => {
 
             <div className='flex justify-between items-center px-4'>
             <h2 className="font-semibold mb-2">৳ {product.price}</h2>
-            <button>cart</button>
+            <button onClick={() => handleAddToCart(product)}>
+                  {cart.some(item => item.id === product.id) ? 'Remove from Cart' : 'Add to Cart'}
+                </button>
             </div> 
             </section>
         ))}
@@ -165,28 +180,6 @@ const ProductList = () => {
             </div>   
         </div>
       )}      
-
-      <Slider {...settings}>
-        {filteredProducts && filteredProducts?.map(product => (
-            <section key={product.id} className="p-2 py-4 bg-[#F5F5F5] group text-center transform duration-500 hover:-translate-y-2 cursor-pointer hover:border-[#526D82] border rounded-sm">
-            <img src={product.thumbnail} className="object-cover object-center md:w-[220px] md:h-[220px]  w-[180px] h-[180px] mx-auto " alt="" />
-            <Link  to={`/product/${product.id}`}>
-                <div className="hover:bg-[#526D82] shadow-lg opacity-0 group-hover:opacity-100 transition-opacity  font-Lore  hover:text-white lg:text-lg md:text-md md:h-12 h-10 text-sm w-[80%] mx-auto  relative inline-flex items-center justify-center md:px-10 px-6 md:py-2 py-1 overflow-hidden font-medium tracking-tighter text-white  bg-[#526D82] rounded-sm group">
-                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#526D82] rounded-full group-hover:w-56 group-hover:h-56"></span>
-                <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-[#526D82]"></span>
-                <span className="relative lg:text-lg md:text-md text-sm">Quick view</span>
-                </div>
-            </Link>
-            <h1 className="text-lg my-2 h-16 -mt-10">{product.title}</h1>
-
-            <div className='flex justify-between items-center px-4'>
-            <h2 className="font-semibold mb-2">৳ {product.price}</h2>
-            <button>cart</button>
-            </div> 
-            </section>
-        ))}
-      
-      </Slider>
 
         {/* Extra Sections | News Letter , Random Feature Prodcuts*/}
       <div>

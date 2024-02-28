@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 import { FaCaretDown, FaCartShopping } from "react-icons/fa6";
 
@@ -43,11 +43,14 @@ import Head from "./Head";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/actions/userLogout";
+import { CartContext } from "../Context/CartContextProvider";
+
 
 const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false);
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
+  const {  cart } = useContext(CartContext);
   // console.log(userState)
   const [isOpen, setIsOpen] = useState(false);
 
@@ -202,7 +205,7 @@ const Navbar = () => {
                     <button onClick={() => setIsOpen(false)} className="relative p-3">
                       <FaCartShopping className="text-xl text-gray-600 " />
                       <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
-                        4
+                        {cart.length}
                       </div>
                     </button>
                   ) : (
@@ -210,7 +213,7 @@ const Navbar = () => {
                     <button onClick={() => setIsOpen(true)} className="relative p-3">
                       <FaCartShopping className="text-xl text-gray-600 " />
                       <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
-                        4
+                      {cart.length}
                       </div>
                     </button>
                   )}
