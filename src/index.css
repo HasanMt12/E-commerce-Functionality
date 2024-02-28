@@ -36,3 +36,11 @@
         max-width: 1536px;
     }
   }
+
+  .newsletter-container {
+    background-image: url('/background.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Set text color to contrast with the background */
+    padding: 20px; /* Adjust padding according to your design */
+  }

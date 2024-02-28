@@ -83,7 +83,7 @@ const Navbar = () => {
                 <div className="flex items-center gap-4">
                   <div className="flex flex-col justify-center">
                     <Link to="/">
-                    <p className="text-[#3C505A] lg:text-md md:text-sm text-xs font-semibold">Replic Mart</p>
+                    <p className="text-[#27374D] bg-[#9DB2BF] px-2 py-1 rounded-lg lg:text-md md:text-sm text-xs font-semibold">Replic Mart</p>
                     </Link>
                   </div>
                   {/* Menu Items */}
