@@ -15,12 +15,11 @@ This project is aimed at implementing minimal e-commerce functionality using Rea
 
 ## Project Structure
 - **src/:** Contains the source code for the React application.
-  - **components/:** Houses reusable components for displaying products and managing the cart.
   - **pages/:** Contains pages related to the main functionalities such as product listing, cart, and additional pages if added.
   APIs or managing asynchronous operations.
   - **store/:** Contains Redux store configuration and slices.
   - **services/:** Includes service functions for interacting with 
-  - **ui/:** Houses UI-related components, styles, for the homepage design.
+  - **ui/:** Houses UI-related components, styles, for the homepage design and Houses reusable components for displaying products and managing the cart.
   - **App.js:** The main component where routing and global state management are handled.
 - **public/:** Contains static assets such as images or favicon.
 
