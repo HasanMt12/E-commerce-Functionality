@@ -43,18 +43,19 @@ import Head from "./Head";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/actions/userLogout";
-// import {  useCart } from "../Context/CartContextProvider";
 import SideCart from "../Pages/Cart/SideCart";
 import CartSection from "../Pages/Cart/CartSection";
+import { useIsOpen } from "../Context/CartOpenContext";
+import { useCart } from "../Context/CartContextProvider";
 
 
 const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false);
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
-  // const [cart, setCart] = (useCart);
+  const [cart, setCart] = useCart();
   // console.log(userState)
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen } = useIsOpen();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -154,8 +155,8 @@ const Navbar = () => {
                           </Button>
                         </DropdownTrigger>
                         <DropdownMenu aria-label="Static Actions">
-                          <DropdownItem key="/my-profile"> <Link to="/my-profile">My Orders</Link></DropdownItem>
-                          <DropdownItem > <Link to="/my-profile">My Address</Link></DropdownItem>
+                          <DropdownItem key="/shopping-cart"> <Link to="/shopping-cart">View Cart</Link></DropdownItem>
+                          <DropdownItem > <Link to="/Checkouts">Checkout</Link></DropdownItem>
                           {userState?.userInfo?.data?.admin === true &&
                             <DropdownItem key="copy"><Link to="/dashboard">Admin Dashboard</Link></DropdownItem>
                           }
@@ -186,8 +187,8 @@ const Navbar = () => {
                           </Button>
                         </DropdownTrigger>
                         <DropdownMenu aria-label="Static Actions">
-                          <DropdownItem> <Link to="/my-profile" className="-mr-10">My Orders</Link></DropdownItem>
-                          <DropdownItem> <Link to="/my-profile">My Address</Link></DropdownItem>
+                        <DropdownItem key="/shopping-cart"> <Link to="/shopping-cart">View Cart</Link></DropdownItem>
+                          <DropdownItem > <Link to="/Checkouts">Checkout</Link></DropdownItem>
                           {userState?.userInfo?.data?.admin === true &&
                             <DropdownItem key="copy"><Link to="/dashboard">Admin Dashboard</Link></DropdownItem>
                           }
@@ -207,7 +208,7 @@ const Navbar = () => {
                     <button onClick={() => setIsOpen(false)} className="relative p-3">
                       <FaCartShopping className="text-xl text-gray-600 " />
                       <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
-                       ok
+                       {cart?.length}
                       </div>
                     </button>
                   ) : (
@@ -215,7 +216,7 @@ const Navbar = () => {
                     <button onClick={() => setIsOpen(true)} className="relative p-3">
                       <FaCartShopping className="text-xl text-gray-600 " />
                       <div className="w-4 h-4 bg-red-500 text-white rounded-full absolute top-0 right-0 flex items-center justify-center text-xs">
-                      ok
+                      {cart?.length}
                       </div>
                     </button>
                   )}
@@ -229,6 +230,7 @@ const Navbar = () => {
         </div>
 
       </div>
+    
       {isOpen && <>
         <SideCart isOpen={isOpen} setIsOpen={setIsOpen}>
           <CartSection setIsOpen={setIsOpen}></CartSection>

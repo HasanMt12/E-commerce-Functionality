@@ -23,8 +23,8 @@ const SideCart = ({ isOpen, setIsOpen, children }) => {
 
           <header className="p-2 font-bold bg-[#F5F5F5] text-lg backdrop-blur-xl backdrop-brightness-150 ">
             <div className="flex justify-between  items-start px-2 ">
-              <div className="flex flex-col justify-start hover:text-[#b89c07] items-start ">
-                <h2 className="text-base atc uppercase">Shopping Bag <span className="font-Roboto text-xs"></span><span className="lowercase text-xs text-gray-700">({cart.length} item)</span></h2>
+              <div className="flex flex-col justify-start hover:text-[#526D82] items-start ">
+                <h2 className="text-base  uppercase">Shopping Bag <span className="font-Roboto text-xs"></span><span className="lowercase text-xs text-gray-700">({cart.length} item)</span></h2>
 
               </div>
               <AiOutlineClose className="w-6 h-6 cursor-pointer" onClick={() => setIsOpen(false)} />

@@ -169,9 +169,9 @@ const LoginForm = ({ handleButtonClick }) => {
 
 
         <div className="flex flex-col gap-2">
-          <button type="submit" className="relative inline-flex items-center justify-center md:px-10 px-6 py-1 overflow-hidden font-medium tracking-tighter text-white  bg-[#b89c07] group w-[100%] rounded-full">
-            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#a08300] rounded-full group-hover:w-[100%] group-hover:h-56"></span>
-            <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-[#b89c07]"></span>
+          <button type="submit" className="relative inline-flex items-center justify-center md:px-10 px-6 py-1 overflow-hidden font-medium tracking-tighter text-white  bg-[#526D82] group w-[100%] rounded-full">
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#9DB2BF] rounded-full group-hover:w-[100%] group-hover:h-56"></span>
+            <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-[#526D82]"></span>
             <span className="relative lg:text-lg md:text-md text-sm flex items-center justify-between  w-full">
               <h2 className=" cursor-pointer font-semibold text-white">Sign In </h2>
               <div
@@ -190,7 +190,7 @@ const LoginForm = ({ handleButtonClick }) => {
               </div>
               <h2 className="text-[#6f7277] cursor-pointer font-semibold underline">Forgot Password</h2>
             </div>
-            <h1 className="text-center mt-5 text-[#6f7277]">Don't have an account? <span onClick={() => handleButtonClick(2)} className="text-[#b89c07] cursor-pointer font-semibold underline mb-5">Sign Up</span></h1>
+            <h1 className="text-center mt-5 text-[#6f7277]">Don't have an account? <span onClick={() => handleButtonClick(2)} className="text-[#526D82] cursor-pointer font-semibold underline mb-5">Sign Up</span></h1>
           </div>
 
         </div>

@@ -38,7 +38,7 @@ const SimilerProduct = () => {
         //                         <main className="p-5 z-10">
         //                             <a
         //                                 // onClick={() => navigate(`/product/${p.slug}`)}
-        //                                 className="text-md  font-Lore yoyo  text-white hover:underline"
+        //                                 className="text-md  font-Lore   text-white hover:underline"
         //                             >
         //                                 Name
         //                             </a>

@@ -3,7 +3,7 @@ import axios from "axios";
 // Make a POST request to the server's registration endpoint
 export const signup = async ({ name, email, password }) => {
   try {
-    const { data } = await axios.post("http://localhost:3000/api/v1/user/register", {
+    const { data } = await axios.post("https://yourchoie.vercel.app/api/v1/user/register", {
       name,
       email,
       password
@@ -24,7 +24,7 @@ export const signup = async ({ name, email, password }) => {
 
 export const login = async ({ email, password }) => {
   try {
-    const { data } = await axios.post("http://localhost:3000/api/v1/user/login", {
+    const { data } = await axios.post("https://yourchoie.vercel.app/api/v1/user/login", {
       email,
       password,
     });

@@ -10,12 +10,12 @@ const FeatureProducts = ({categories, filteredProducts}) => {
             <SectionHeading headingText={"Feature Products"}></SectionHeading>
 
             <Tabs aria-label="Dynamic tabs">
-            {categories?.map(category => (
+            {categories?.slice(1, 4).map(category => (
                 <Tab
                 key={category}
                 value={category}
                 title={
-                    <div className="flex items-center space-x-2 mx-2">
+                    <div className="flex items-center tex-xs mx-2">
                     <span>{category} </span>
                     {/* <Chip size="sm" variant="faded">{category.products.length}</Chip> */}
                     </div>
@@ -29,7 +29,7 @@ const FeatureProducts = ({categories, filteredProducts}) => {
                         {filteredProducts
                         .filter(product => product.category === category)
                         .map(product => (
-                            <Link to={`/product/${product._id}`} key={product.id}>
+                            <Link to={`/product/${product.id}`} key={product.id}>
                             <Card shadow="sm" isPressable>
                                 <CardBody className="overflow-visible p-0 ">
                                 <Image
@@ -41,15 +41,16 @@ const FeatureProducts = ({categories, filteredProducts}) => {
                                     src={product.thumbnail}
                                 />
                                 </CardBody>
-                                <CardFooter className="text-small justify-between items-end">
+                                <div className="text-small px-2 py-1">
                                 <div>
-                                    <b>{product.title}</b>
-                                    <p className="text-default-500 -ml-6">Price:</p>
+                                    <h2 className="h-6 text-semibold">{product.title}</h2>
+                                    
                                 </div>
-                                <div>
-                                    <p className="text-default-500">{product.price}$</p>
+                                <div className="flex justify-between items-center">
+                                    <p className="text-default-500">Price:</p>
+                                    <p className="text-default-500">$ {product.price}</p>
                                 </div>
-                                </CardFooter>
+                                </div>
                             </Card>
                             </Link>
                         ))}

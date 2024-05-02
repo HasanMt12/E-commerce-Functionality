@@ -39,9 +39,9 @@ const LoginPages = () => {
 
       <div className=" items-center justify-center  lg:ml-0 lg:flex hidden">
         <div className="flex items-center gap-5">
-          <Link to="/"><IoIosArrowBack className="my-4 text-lg text-[#b89c07]"></IoIosArrowBack></Link>
-          {selectedDive === 1 ? (<h2 className="text-[#b89c07] text-center text-2xl cursor-pointer font-semibold ">Welcome To Login</h2>) : (
-            <h2 className="text-[#b89c07] cursor-pointer text-center text-2xl font-semibold ">Welcome To Sign Up</h2>
+          <Link to="/"><IoIosArrowBack className="my-4 text-lg text-[#526D82]"></IoIosArrowBack></Link>
+          {selectedDive === 1 ? (<h2 className="text-[#526D82] text-center text-2xl cursor-pointer font-semibold ">Welcome To Login</h2>) : (
+            <h2 className="text-[#526D82] cursor-pointer text-center text-2xl font-semibold ">Welcome To Sign Up</h2>
           )}
         </div>
       </div>
